@@ -7,11 +7,11 @@ We have provided a notebook `vis_demo.ipynb` for a demo visualization of self-su
 
 ## Environment Setup
 Setup environment and install with the packages:
-```
-    Python: 3.6
-    torch: 1.10.1
-    torchvision: 0.11.2
-```
+
+* Python==3.6.13
+* torch==1.10.1
+* torchvision==0.11.2
+
 
 Our environment is partly based on the [ConfidNet](https://github.com/valeoai/ConfidNet).
 ```
@@ -30,8 +30,8 @@ All the datasets should be placed under data/ directory.
     mkdir data/
 ```
 * CIFAR-10: can be downloaded automatically from torchvision.datasets
-* CINIC-10: refer to [https://github.com/BayesWatch/cinic-10](https://github.com/BayesWatch/cinic-10)
-* STL-10: refer to [https://cs.stanford.edu/~acoates/stl10](https://cs.stanford.edu/~acoates/stl10)
+* CINIC-10: [https://github.com/BayesWatch/cinic-10](https://github.com/BayesWatch/cinic-10)
+* STL-10: [https://cs.stanford.edu/~acoates/stl10](https://cs.stanford.edu/~acoates/stl10)
 
 OOD related datasets:
 * SVHN: can be downloaded automatically from torchvision.datasets
