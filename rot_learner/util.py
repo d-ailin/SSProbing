@@ -16,7 +16,7 @@ def retrieve_data(dataset_name, dataset):
     if dataset_name == 'svhn':
         return dataset.data, dataset.labels
 
-def show_res(scores, corrects, save_img_path, tag, config={}, other_config={}):
+def show_dist(scores, corrects, save_img_path, tag, config={}, other_config={}):
     xlabel = other_config['xlabel']
 
     scores = np.array(scores).reshape(-1)
@@ -28,7 +28,8 @@ def show_res(scores, corrects, save_img_path, tag, config={}, other_config={}):
     dist = wasserstein_distance(scores[wrong_mask], scores[correct_mask])
     # print('{} dist:'.format(tag), dist)
 
-    font = {'family' : 'normal',
+    font = {
+        # 'family' : 'normal',
         # 'weight' : 'bold',
             'size'   : 12}
 
