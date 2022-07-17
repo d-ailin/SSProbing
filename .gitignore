@@ -1,0 +1,11 @@
+_*.*
+*_old/
+__MACOSX
+__pycache__
+snapshots/
+res_dir/
+fig/
+data/
+weighted_res/
+*.zip
+.ipynb_checkpoints
