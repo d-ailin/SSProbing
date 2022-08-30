@@ -391,17 +391,9 @@ class TemperatureScalingWithSSL():
     def _loss_fun(self, x, probs, true, ssl):
         # Calculates the loss using log-loss (cross-entropy loss)
         scaled_probs = self.predict(probs, ssl, x)
-        # if (scaled_probs == 0).sum() > 0:
-        #     print('(scaled_probs == 0).sum()', (scaled_probs == 0).sum())
-        # if np.isnan(scaled_probs).sum() > 0:
-        #     print('np.isnan(scaled_probs).sum()', np.isnan(scaled_probs).sum())
-
-        # loss = log_loss(y_true=true, y_pred=scaled_probs)
-        # print('current x', x)
+        
         loss = log_loss(y_true=true, y_pred=scaled_probs)
-        # loss = F.cross_entropy( torch.Tensor(scaled_probs), torch.Tensor(true).long() ).numpy()
-        # if np.isnan(loss).sum() > 0:
-        #     print('np.isnan(loss).sum()', np.isnan(loss).sum())
+ 
         return loss
     
     # Find the temperature
@@ -418,19 +410,11 @@ class TemperatureScalingWithSSL():
         """
         
         true = true.flatten() # Flatten y_val
-        # opt = minimize(self._loss_fun, x0 = np.ones(3), args=(logits, true, ssl), options={'maxiter':self.maxiter, 'disp':True}, method = self.solver, bounds=[(-5, 5), (-5, 5), (-5, 5)])
-        # need to initilize with very small value close to 0, otherwise will get trival solution or get NaN when having too many points.
-        # ok for cifar10 resnet
-        # opt = minimize(self._loss_fun, x0 = np.ones(3)/10, args=(logits, true, ssl), options={'maxiter':self.maxiter, 'disp':True}, method = self.solver, bounds=[(-5, 5), (-5, 5), (-5, 5)])
-        
+       
         fit_nums = ssl.shape[1] + 1 # ssl and original
 
-        # debug for cinic10
-        # opt = minimize(self._loss_fun, x0 = np.ones(fit_nums)/2, args=(logits, true, ssl), options={'maxiter':self.maxiter, 'disp':True}, method = self.solver)
         opt = minimize(self._loss_fun, x0 = np.ones(fit_nums)/2, args=(logits, true, ssl), options={'maxiter':self.maxiter}, method = self.solver)
-        # self.temp = opt.x[0]
         self.temp = opt.x
-        # print('finished temp', self.temp)
         
         return opt
         
@@ -450,12 +434,6 @@ class TemperatureScalingWithSSL():
             temp = self.temp
 
         temp_ssl = (temp[0] - temp[1] * ssl[:, 0] - temp[2] * ssl[:, 1]).reshape(-1, 1)
-            # return softmax(logits/temp)
-        # add epilson
-        # temp_ssl[temp_ssl == 0] = 1e-8
-        # return softmax(logits/(temp_ssl))
-
-        # or change to mulitple
         return softmax(logits * temp_ssl)
 
 
@@ -555,14 +533,6 @@ def cal_results(fn, res, m_kwargs = {}, approach = "all"):
         print("Error %f; ece %f; mce %f; loss %f, brier %f" % evaluate(probs_test, y_test, verbose=False, normalize=True))
         
     
-    # df.loc[i*2] = [name, error, ece, mce, loss, brier]
-    # df.loc[i*2+1] = [(name + "_calib"), error2, ece2, mce2, loss2, brier2]
-    
-    # t2 = time.time()
-    # print("Time taken:", (t2-t1), "\n")
-        
-    # total_t2 = time.time()
-    # print("Total time taken:", (total_t2-total_t1))
         
     return evaluate(probs_test, y_test, verbose=False, normalize=True)
  
