@@ -1,9 +1,9 @@
 # SSProbing
 
-Code for the paper: [Trust, but Verify: Using Self-Supervised Probing to Improve Trustworthiness (ECCV'22)]()
+Code for the paper: [Trust, but Verify: Using Self-Supervised Probing to Improve Trustworthiness (ECCV'22)](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136730362.pdf)
 
 ## Demo Visualization
-We have provided a notebook `vis_demo.ipynb` for a demo visualization of self-supervised probing confidence scores.
+We have provided a notebook `vis_demo.ipynb`[(link)](https://github.com/d-ailin/SSProbing/blob/main/vis_demo.ipynb) for a demo visualization of self-supervised probing confidence scores.
 
 ## Environment Setup
 Setup environment and install with the packages:
@@ -103,10 +103,12 @@ For more details, you could also refer to `run_mis.sh / run_ood.sh / run_cal.sh`
 If you find this repo or our work useful for your research, please consider citing the paper
 ```
 @inproceedings{deng2022trust,
-  title={Trust, but Verify: Using Self-Supervised Probing to Improve Trustworthiness },
+  title={Trust, but Verify: Using Self-supervised Probing to Improve Trustworthiness},
   author={Deng, Ailin and Li, Shen and Xiong, Miao and Chen, Zhirui and Hooi, Bryan},
-  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
-  year={2022}
+  booktitle={European Conference on Computer Vision},
+  pages={361--377},
+  year={2022},
+  organization={Springer}
 }
 ```
 
